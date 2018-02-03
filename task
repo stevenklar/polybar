@@ -1,0 +1,11 @@
+#!/bin/bash
+
+project=$(task +ACTIVE _project)
+description=$(task +ACTIVE _zshids)
+
+if [[ $project ]]; then
+    echo "$project - $description";
+else
+    exit 1
+fi
+

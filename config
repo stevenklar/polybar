@@ -1,0 +1,465 @@
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[colors]
+;background = ${xrdb:color0:#222}
+#background = #DA222222
+background = #00
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+warning = #e89033
+yellow = #f9a825
+green = #00ff00
+clear = #00
+grey = #33
+
+[colours]
+bg = #DA222222
+maia =  #259E83
+white = #e8e8e8
+red =   #ff4d4d
+grey =  #33
+clear = #00
+yellow = #f9a825
+
+[bar/example]
+monitor = ${env:MONITOR:eDP1}
+width = 100%
+height = 32
+radius = 0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 10
+border-color = #00000000
+
+padding-left = 3
+padding-right = 5
+
+module-margin-left = 2
+module-margin-right = 2
+
+#font-0 = San Francisco:pixelsize=12;1
+#font-0 = Ubuntu Mono Regular:pixelsize=13;1
+font-0 = SanFranciscoText-Regular:pixelsize=15;3
+font-1 = "FontAwesome:fontformat=truetype:size=16;3"
+font-2 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-3 = MaterialIcons:size=16;5
+font-4 = siji:pixelsize=10;1
+
+#modules-left = powermenubarlauncher powermenu i3
+#modules-center = task
+#modules-right = gmail xbacklight volume filesystem cpu memory wlan eth xkeyboard battery date time
+modules-left = powermenubarlauncher i3
+modules-center = task
+modules-right = wlan eth volume battery date xkeyboard
+
+;tray-position = middle
+;tray-padding = 0
+;tray-transparent = false
+;tray-background = #222
+
+wm-restack = i3
+
+;override-redirect = true
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+[module/gmail]
+type = custom/script
+interval = 10
+format = <label>
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground-alt}
+exec = ~/.config/polybar/mail
+click-left = "google-chrome https://inbox.google.com/ https\://outlook.office365.com/owa/"
+
+[module/task]
+type = custom/script
+interval = 3
+format = <label>
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+exec = ~/.config/polybar/task
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
+format-prefix-underline = ${colors.yellow}
+
+label-layout = %layout%
+label-layout-underline = ${colors.yellow}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.yellow}
+label-indicator-underline = ${colors.yellow}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =   %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+label-mounted-underline= ${colors.primary}
+
+[module/i3]
+type = internal/i3
+strip-wsnumbers = false
+enable-click = true
+enable-scroll = true
+reverse-scroll =true
+
+; Only show workspaces on the same output as the bar
+; ws-icon-0 = 1;%{F#8859ff}
+ws-icon-0 = 1;%{T4}1%{T-}
+ws-icon-1 = 2;%{T4}2%{T-}
+ws-icon-2 = 3;%{T4}3%{T-}
+ws-icon-3 = 4;%{T4}4%{T-}
+ws-icon-4 = 5;%{T4}5%{T-}
+ws-icon-5 = 6;%{T4}6%{T-}
+ws-icon-6 = 7;%{T4}7%{T-}
+ws-icon-7 = 8;%{T4}8%{T-}
+ws-icon-8 = 9;%{F#e44332}
+ws-icon-9 = 10;%{T4}10%{T-}
+ws-icon-10 = ;%{F#1ED760}
+ws-icon-11 = ;
+
+format = <label-mode> <label-state> <label-mode>
+label-mode-padding = 2
+label-mode-foreground = ${colours.white}
+label-mode-background = ${colours.maia}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-foreground = ${colours.white}
+label-focused-background = #3f3f3f
+label-focused-underline= #fba922
+label-focused-padding = 4
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-foreground = ${colours.white}
+label-unfocused-padding = 4
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-underline = #555555
+label-visible-padding = 4
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 4
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label>  <bar>
+label =  
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
+format-underline = #f90000
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground}
+format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp58s0
+interval = 3.0
+
+click-left = nm-connection-editor
+
+format-connected =   <ramp-signal> <label-connected>
+format-connected-underline = #00FF00
+label-connected = %essid%
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.warning}
+label-disconnected = "  "
+label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
+[module/eth]
+type = internal/network
+interface = enx0050b61f7c8b
+#interface = vethebebab7
+interval = 3
+
+label-connected = %ifname%
+format-connected =   <label-connected>
+format-connected-underline = #00FF00
+
+label-disconnected = "  "
+label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.warning}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%d.%m.%y %H:%M"
+
+format-underline = #0a6cf5
+
+label = %date%
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = "%H:%M"
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = %time%
+
+[module/volume]
+type = internal/volume
+
+format-volume = <label-volume>  <bar-volume>
+label-volume = 
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted =  muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = ${colors.green}
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${colors.yellow}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = #00FF00
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.alert}
+ramp-capacity-0-underline = ${colors.alert}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.warning}
+ramp-capacity-1-underline = ${colors.warning}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.yellow}
+ramp-capacity-2-underline = ${colors.yellow}
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colors.green}
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.green}
+animation-charging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+label-open = " "
+label-close = " "
+label-seperator = |
+
+menu-0-0 = Logout
+menu-0-0-exec = i3-msg exit
+
+menu-0-1 = Reboot
+menu-0-1-exec = reboot
+
+menu-0-2 = Power off
+menu-0-2-exec = shutdown -t 0
+
+[module/powermenubarlauncher]
+type = custom/text
+content = ""
+click-left = polybar powermenubar
+
+[bar/powermenubar]
+monitor = eDP-1
+width = 12%
+height = 50
+radius = 3
+
+background = #DA222222
+foreground = ${colours.white}
+
+border-size = 0
+border-color =${colours.clear}
+
+border-bottom-size = 0
+border-bottom-color = ${colours.clear}
+
+border-top-size = 0
+border-top-color = ${colours.clear}
+
+border-right-size = 0
+
+offset-x = 0
+offset-y = 50
+
+padding = 3
+module-margin = 3
+separator = %{F#33}|
+
+font-0 = System San Francisco Display:size=10;2
+font-1 = FontAwesome:size=14;3
+font-2 = MaterialIcons:size=14;4
+;http://fontawesome.io/cheatsheet/
+;https://shanfan.github.io/material-icons-cheatsheet/
+
+modules-right = closepowermenubar logout suspend reboot poweroff
+override-redirect = true
+
+[module/lock]
+type = custom/text
+content = "%{F#259E83} %{F-}Lock"
+click-left = "pkill -n polybar ; sh ~/.config/i3/Lock.sh"
+
+[module/suspend]
+type = custom/text
+content = ""
+click-left = "pkill -n polybar ; systemctl suspend"
+
+[module/logout]
+type = custom/text
+content = ""
+click-left = "pkill -n polybar ; i3-msg exit"
+
+[module/reboot]
+type = custom/text
+content = ""
+click-left = "pkill -n polybar ; systemctl reboot"
+
+[module/poweroff]
+type = custom/text
+content = " "
+click-left = "pkill -n polybar ; systemctl poweroff"
+
+
+[module/closepowermenubar]
+type = custom/text
+content = "%{F#259E83}"
+click-left = "pkill -n polybar"
+
+[settings]
+throttle-output = 10
+throttle-output-for = 10
+throttle-input-for = 30
+
